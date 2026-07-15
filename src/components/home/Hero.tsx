@@ -38,6 +38,7 @@ export function Hero() {
   }, [])
 
   const lines = profile.tagline.split('\n')
+  const isExternalCta = profile.heroCta.href.startsWith('http')
 
   return (
     <section className={section} ref={rootRef}>
@@ -63,8 +64,14 @@ export function Hero() {
           <Button to="/projects" tone="primary" size="lg">
             프로젝트 보기
           </Button>
-          <Button href={`mailto:${profile.email}`} tone="secondary" size="lg">
-            이메일 보내기
+          <Button
+            href={profile.heroCta.href}
+            target={isExternalCta ? '_blank' : undefined}
+            rel={isExternalCta ? 'noreferrer' : undefined}
+            tone="secondary"
+            size="lg"
+          >
+            {profile.heroCta.label}
           </Button>
         </div>
       </Container>

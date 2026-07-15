@@ -29,6 +29,8 @@ npm run dev
 
 [`src/data/profile.ts`](src/data/profile.ts) 에서 이름, 역할, 소개, 이메일, 소셜 링크를 수정하세요.
 
+`heroCta`는 홈 화면 히어로의 두 번째 버튼입니다. 기본은 메일 앱을 여는 "이메일 보내기"이지만, `label`/`href`를 자유롭게 바꿔서 이력서 PDF, 연락처 폼, Calendly 링크 등으로 써도 됩니다. `href`가 `http`로 시작하면 새 탭으로 열립니다.
+
 ### 2. 프로젝트 추가하기
 
 [`src/data/projects.ts`](src/data/projects.ts) 배열에 새 객체를 추가하면 목록 페이지와 상세 페이지에 자동으로 반영됩니다.
