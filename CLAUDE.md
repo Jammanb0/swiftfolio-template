@@ -55,7 +55,9 @@ npm run deploy    # build + push dist/ to gh-pages branch
 ```
 src/
   components/
-    layout/     Header, Footer, Layout (page-transition wrapper), Container
+    layout/     Header (renders profile.avatar as a circular image when set —
+                empty string renders nothing, don't add a fallback icon),
+                Footer, Layout (page-transition wrapper), Container
     ui/         Generic, content-agnostic: Button (recipe-based variants), Tag
     portfolio/  Domain components: ProjectCard (truncates tags to 4 + a "+N"
                 badge — full list still shown on the detail page, filtering
@@ -97,6 +99,10 @@ src/
 - Adding a portfolio entry never requires touching routing or page code —
   only `src/data/projects.ts`. If a change to add a project touches anything
   else, something is architecturally wrong.
+- `ProjectDetail`'s media block (`src/pages/ProjectDetail.tsx`) only renders
+  when `thumbnail` and/or `youtubeId` is set — never render an empty
+  placeholder box when both are missing. When both are set, the banner image
+  comes first, the video second (both stacked, not either/or).
 - This repo targets a **user page** (`username.github.io`, served from
   repo root, `base: '/'` in `vite.config.ts`). If someone deploys it as a
   **project page** instead, `vite.config.ts`'s `base` and
