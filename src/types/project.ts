@@ -10,16 +10,26 @@ export interface Project {
   title: string
   /** One or two lines shown on the project card */
   summary: string
-  /** Longer text shown on the project detail page. Line breaks are preserved. */
+  /**
+   * Full write-up shown on the project detail page. Supports GitHub-flavored
+   * Markdown — headings, tables, bold/italic, lists, links, code blocks.
+   * Write as much or as little structure as the project needs.
+   */
   description: string
+  /** e.g. 'Solo Developer', 'Team Lead, Frontend' — shown next to the date range */
+  role?: string
+  /** Bullet points shown below the description — achievements, key facts, whatever's freeform */
+  highlights?: string[]
   /** Path under /public or an external image URL, shown on the card and detail hero */
   thumbnail?: string
   /** YouTube video ID (the part after v= in the URL), embeds a responsive player */
   youtubeId?: string
   tags: string[]
   links?: ProjectLink[]
-  /** ISO date string, e.g. '2026-05-01'. Used for sorting, newest first. */
+  /** ISO date string, e.g. '2026-05-01'. Start date — also used for sorting, newest first. */
   date: string
+  /** ISO date string. Omit if the project is still ongoing ("진행 중" is shown instead). */
+  endDate?: string
   /** Featured projects are highlighted on the home page */
   featured?: boolean
 }

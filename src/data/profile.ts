@@ -1,3 +1,8 @@
+/**
+ * 사이트 소유자 정보. 전부 string입니다 — 원하는 값으로 바꾸세요.
+ * - tagline: 히어로 섹션 제목. `\n`을 넣으면 그 자리에서 줄바꿈됩니다.
+ * - social: 원하는 만큼 추가/삭제 가능한 배열. Footer에 순서대로 표시됩니다.
+ */
 export const profile = {
   name: '홍길동',
   role: 'Frontend Developer',
