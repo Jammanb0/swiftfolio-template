@@ -16,7 +16,7 @@ import {
   title,
   tagRow,
   media,
-  thumbFallback,
+  bannerImage,
   description,
   highlights,
   highlightItem,
@@ -61,15 +61,16 @@ export default function ProjectDetail() {
           </div>
         </header>
 
-        <div className={media}>
-          {project.youtubeId ? (
-            <YoutubeEmbed youtubeId={project.youtubeId} title={project.title} />
-          ) : project.thumbnail ? (
-            <img src={project.thumbnail} alt={project.title} />
-          ) : (
-            <div className={thumbFallback} />
-          )}
-        </div>
+        {(project.thumbnail || project.youtubeId) && (
+          <div className={media}>
+            {project.thumbnail && (
+              <img className={bannerImage} src={project.thumbnail} alt={project.title} />
+            )}
+            {project.youtubeId && (
+              <YoutubeEmbed youtubeId={project.youtubeId} title={project.title} />
+            )}
+          </div>
+        )}
 
         {project.highlights && project.highlights.length > 0 && (
           <ul className={highlights}>

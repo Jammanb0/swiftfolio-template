@@ -16,9 +16,11 @@ import type { Project } from '@/types/project'
  * - role?        string, 선택. 예: 'Solo Developer', 'Team Lead, Frontend'.
  * - highlights?  string[], 선택. 상세 페이지 상단에 강조 표시되는 bullet 목록.
  * - thumbnail?   string, 선택. public/ 폴더 기준 절대경로(예: '/thumb.png') 또는 이미지 URL.
- *                없으면 그라데이션 플레이스홀더가 대신 표시됩니다.
- * - youtubeId?   string, 선택. 유튜브 URL의 v= 뒤 부분. 상세 페이지 최상단에
- *                큰 히어로 영상으로 표시됩니다 (본문 중간 임베드와는 별개).
+ *                카드 썸네일이자 상세 페이지 배너 이미지로 동시에 쓰입니다.
+ * - youtubeId?   string, 선택. 유튜브 URL의 v= 뒤 부분. 상세 페이지에서 배너 이미지
+ *                (있다면) 바로 아래에 표시됩니다 (본문 중간 임베드와는 별개).
+ *                thumbnail도 youtubeId도 없으면 상세 페이지에 미디어 영역 자체가
+ *                생기지 않습니다 — 빈 박스가 뜨지 않습니다.
  * - tags         string[], 필수. 기술 스택. Projects 페이지 필터에도 쓰입니다.
  * - links?       { label, url, icon? }[], 선택. icon은 'github' | 'external' | 'demo'.
  * - date         string, 필수. 'YYYY-MM-DD' 형식. 시작일이며 정렬 기준입니다.
@@ -36,8 +38,8 @@ export const projects: Project[] = [
       'src/data/projects.ts의 highlights 배열에 원하는 만큼 추가하세요.',
     ],
     description:
-      '## 이 프로젝트는 템플릿 예시입니다\n\n`src/data/projects.ts` 파일의 이 항목을 자신의 프로젝트 정보로 바꾸거나, 배열에 새 항목을 추가해서 포트폴리오를 채워보세요.\n\n**설명(description)은 마크다운을 지원**합니다 — 표도 쓸 수 있어요.\n\n| 항목 | 설명 |\n| --- | --- |\n| 헤딩 | `##`, `###` |\n| 강조 | `**굵게**`, `*기울임*` |\n| 표 | 이 표처럼 |\n| 이미지 | `![alt](url)` |\n\n- 목록도 되고\n- 링크도 됩니다: [example.com](https://example.com)\n\n이미지도 기본 마크다운 문법으로 됩니다:\n\n![샘플 이미지](https://placehold.co/600x300)',
-    thumbnail: '',
+      '## 이 프로젝트는 템플릿 예시입니다\n\n`src/data/projects.ts` 파일의 이 항목을 자신의 프로젝트 정보로 바꾸거나, 배열에 새 항목을 추가해서 포트폴리오를 채워보세요.\n\n**설명(description)은 마크다운을 지원**합니다 — 표도 쓸 수 있어요.\n\n| 항목 | 설명 |\n| --- | --- |\n| 헤딩 | `##`, `###` |\n| 강조 | `**굵게**`, `*기울임*` |\n| 표 | 이 표처럼 |\n| 이미지 | `![alt](url)` |\n\n- 목록도 되고\n- 링크도 됩니다: [example.com](https://example.com)\n\n이미지도 기본 마크다운 문법으로 됩니다:\n\n![샘플 이미지](https://placehold.co/600x300)\n\n이 프로젝트는 thumbnail과 youtubeId가 둘 다 있어서, 상세 페이지에 배너 이미지가 먼저, 유튜브 영상이 그 아래에 순서대로 표시됩니다.',
+    thumbnail: 'https://placehold.co/1200x675',
     youtubeId: 'dQw4w9WgXcQ',
     tags: ['React', 'TypeScript', 'Vite'],
     links: [
@@ -53,7 +55,8 @@ export const projects: Project[] = [
     summary: '팀의 일관된 UI를 위한 컴포넌트 라이브러리를 설계했습니다.',
     role: 'Frontend Developer',
     description:
-      '두 번째 샘플 프로젝트입니다. `youtubeId` 없이 썸네일과 링크만 있는 카드 형태 예시입니다.\n\nendDate가 없으면 상세 페이지와 카드에 기간이 "진행 중"으로 표시됩니다.\n\n본문 중간에 유튜브 영상을 넣고 싶다면 이렇게 코드블록 언어를 `youtube`로 쓰고 영상 ID만 적으세요:\n\n```youtube\ndQw4w9WgXcQ\n```\n\n위 블록이 실제로는 반응형 플레이어로 렌더링됩니다. 하나의 프로젝트에 여러 개 넣어도 됩니다.',
+      '두 번째 샘플 프로젝트입니다. `youtubeId` 없이 `thumbnail`만 있는 예시라, 상세 페이지엔 배너 이미지만 표시되고 그 아래 영상 자리는 아예 생기지 않습니다.\n\nendDate가 없으면 상세 페이지와 카드에 기간이 "진행 중"으로 표시됩니다.\n\n본문 중간에 유튜브 영상을 넣고 싶다면 이렇게 코드블록 언어를 `youtube`로 쓰고 영상 ID만 적으세요:\n\n```youtube\ndQw4w9WgXcQ\n```\n\n위 블록이 실제로는 반응형 플레이어로 렌더링됩니다. 하나의 프로젝트에 여러 개 넣어도 됩니다.',
+    thumbnail: 'https://placehold.co/1200x675',
     tags: ['Storybook', 'vanilla-extract', 'Design System'],
     links: [{ label: 'GitHub', url: 'https://github.com', icon: 'github' }],
     date: '2026-03-15',
@@ -65,7 +68,7 @@ export const projects: Project[] = [
     summary: '주말 동안 만들어본 작은 프로젝트입니다.',
     role: 'Solo Developer',
     description:
-      '세 번째 샘플 프로젝트 설명입니다. `endDate`를 지정하면 기간이 "시작 - 종료"로 표시됩니다.',
+      '세 번째 샘플 프로젝트 설명입니다. `endDate`를 지정하면 기간이 "시작 - 종료"로 표시됩니다.\n\n이 프로젝트는 `thumbnail`도 `youtubeId`도 없어서, 상세 페이지에 미디어 영역 자체가 생기지 않고 곧바로 이 본문으로 이어집니다 — 빈 박스가 뜨지 않습니다.',
     tags: ['Next.js', 'GSAP'],
     links: [{ label: 'GitHub', url: 'https://github.com', icon: 'github' }],
     date: '2025-11-10',

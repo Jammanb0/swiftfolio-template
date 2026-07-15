@@ -20,7 +20,13 @@ export interface Project {
   role?: string
   /** Bullet points shown below the description — achievements, key facts, whatever's freeform */
   highlights?: string[]
-  /** Path under /public or an external image URL, shown on the card and detail hero */
+  /**
+   * Path under /public or an external image URL. Doubles as the card's
+   * thumbnail and the detail page's banner image. If youtubeId is also set,
+   * this image is shown above the video on the detail page. If neither
+   * thumbnail nor youtubeId is set, the detail page shows no media block at
+   * all (no empty placeholder).
+   */
   thumbnail?: string
   /** YouTube video ID (the part after v= in the URL), embeds a responsive player */
   youtubeId?: string

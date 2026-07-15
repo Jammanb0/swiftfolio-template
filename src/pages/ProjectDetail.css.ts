@@ -58,14 +58,17 @@ export const tagRow = style({
 })
 
 export const media = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: vars.space[5],
   marginBottom: vars.space[10],
 })
 
-export const thumbFallback = style({
+export const bannerImage = style({
   width: '100%',
   aspectRatio: '16 / 9',
   borderRadius: vars.radius.lg,
-  background: `linear-gradient(135deg, ${vars.color.blue50}, ${vars.color.gray100})`,
+  objectFit: 'cover',
 })
 
 export const description = style({
