@@ -3,6 +3,8 @@
 React + TypeScript로 만든, 흰 배경과 파란 포인트 컬러를 사용하는 빠르고 담백한 포트폴리오 사이트 템플릿입니다.
 누구나 fork/clone해서 자신의 GitHub Pages 포트폴리오(`your-id.github.io`)로 바로 사용할 수 있도록 만들어졌습니다.
 
+> AI(Claude Code)를 활용해 기획부터 구현까지 진행한 프로젝트입니다. 과정이 궁금하다면 [PROCESS.md](PROCESS.md)를 참고하세요.
+
 ## 특징
 
 - **React 19 + TypeScript + Vite** — 빠른 개발 서버와 빌드
