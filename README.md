@@ -10,7 +10,8 @@ React + TypeScript로 만든, 흰 배경과 파란 포인트 컬러를 사용하
 - **Framer Motion** — 페이지 전환, 카드 호버, 버튼 인터랙션
 - **GSAP + ScrollTrigger** — 히어로 섹션 등장 애니메이션
 - **react-router-dom** — 프로젝트 상세 페이지 라우팅 (GitHub Pages SPA 리다이렉트 포함)
-- **유튜브 임베드 컴포넌트** — 프로젝트에 영상 하나만 추가하면 끝
+- **마크다운 지원 상세 설명** — react-markdown + remark-gfm으로 헤딩/표/굵게/목록/링크를 자유롭게 작성, 본문 중간에 유튜브 임베드도 가능
+- **검색 + 태그 + 연도 필터** — Projects 페이지에서 프로젝트를 바로 찾을 수 있음
 - 프로젝트는 **TypeScript 배열 하나(`src/data/projects.ts`)**로 관리 — 별도 CMS 없이 커밋만으로 포트폴리오 추가
 
 ## 시작하기
@@ -37,20 +38,34 @@ npm run dev
   id: 'my-new-project',        // URL: /projects/my-new-project
   title: '내 프로젝트',
   summary: '카드에 보이는 한 줄 요약',
-  description: '상세 페이지에 보이는 설명입니다.\n줄바꿈이 그대로 유지됩니다.',
+  description: '## 상세 페이지 본문\n\n마크다운을 그대로 씁니다. **굵게**, 표, 목록, [링크](https://...) 전부 가능합니다.',
+  role: 'Solo Developer',      // 상세 페이지에 기간과 함께 표시 (선택)
+  highlights: ['핵심 성과 1', '핵심 성과 2'], // 상세 페이지 상단 강조 bullet (선택)
   thumbnail: '/my-thumb.png',  // public 폴더 기준 경로 (선택)
-  youtubeId: 'VIDEO_ID',       // 유튜브 URL의 v= 뒤 부분 (선택)
+  youtubeId: 'VIDEO_ID',       // 유튜브 URL의 v= 뒤 부분 — 상세 페이지 최상단 히어로 영상 (선택)
   tags: ['React', 'TypeScript'],
   links: [
     { label: 'GitHub', url: 'https://github.com/...', icon: 'github' },
     { label: '라이브 데모', url: 'https://...', icon: 'demo' },
   ],
-  date: '2026-07-01',
-  featured: true,              // 홈 화면 Featured 섹션에 노출
+  date: '2026-07-01',          // 시작일, 정렬 기준
+  endDate: '2026-08-01',       // 생략하면 "진행 중"으로 표시 (선택)
+  featured: true,               // 홈 화면 Featured 섹션에 노출 (선택)
 }
 ```
 
-- `youtubeId`가 있으면 상세 페이지에 반응형 유튜브 플레이어가 자동으로 삽입됩니다.
+각 필드에 대한 설명은 [`src/data/projects.ts`](src/data/projects.ts) 상단 주석에도 동일하게 적혀 있습니다.
+
+- `description`은 **GitHub-flavored Markdown**을 지원합니다 — `#`/`##` 헤딩, `**굵게**`, `*기울임*`, 표, 목록, `[텍스트](url)` 링크를 그대로 쓰면 됩니다.
+- 본문 중간에 유튜브 영상을 넣고 싶으면 코드블록 언어를 `youtube`로 지정하고 영상 ID만 적으세요. 하나의 프로젝트에 여러 개 넣어도 됩니다.
+
+  ````
+  ```youtube
+  dQw4w9WgXcQ
+  ```
+  ````
+
+- `youtubeId` 필드는 이것과 별개로, 상세 페이지 최상단에 오는 **대표 히어로 영상 하나**를 지정할 때 씁니다.
 - `thumbnail`이 없으면 카드에 그라데이션 플레이스홀더가 대신 표시됩니다.
 - 이미지는 `public/` 폴더에 넣고 `/파일명.png` 형태의 절대 경로로 참조하세요.
 
@@ -100,11 +115,14 @@ src/
   components/
     layout/     Header, Footer, Layout, Container
     ui/         Button, Tag 같은 범용 컴포넌트
-    portfolio/  ProjectCard, YoutubeEmbed, LinkList
+    portfolio/  ProjectCard, YoutubeEmbed, LinkList, Markdown, ProjectFilters
     home/       Hero (GSAP 애니메이션)
   data/
     profile.ts   내 정보
     projects.ts  프로젝트 목록 — 여기에 계속 추가하면 됩니다
+  lib/
+    date.ts      기간 포맷 유틸 ('2026.03 - 진행 중' 형태)
+    gsap.ts      GSAP + ScrollTrigger 등록
   pages/         Home, Projects, ProjectDetail, NotFound
   styles/        theme.css.ts (디자인 토큰), global.css.ts
   types/         Project 타입 정의

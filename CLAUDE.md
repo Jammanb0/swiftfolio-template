@@ -5,9 +5,10 @@ Guidance for Claude Code (or any AI coding agent) working in this repo.
 ## What this is
 
 A React + TypeScript portfolio site template, styled like a clean fintech
-product (white background, one blue accent color, big confident type, rich
-but subtle motion). Meant to be forked/cloned by anyone and deployed as
-their own `<username>.github.io` GitHub Pages site.
+product — Toss-style: white background, a single blue accent color, generous
+rounded corners, subtle shadows, big confident type, paired with rich but
+purposeful motion (not just a bare white page). Meant to be forked/cloned by
+anyone and deployed as their own `<username>.github.io` GitHub Pages site.
 
 ## Stack
 
@@ -25,7 +26,15 @@ their own `<username>.github.io` GitHub Pages site.
   (`src/components/home/Hero.tsx`). Reach for GSAP when Framer Motion's
   declarative variants aren't expressive enough (complex timelines, scroll-
   scrubbed effects), not for simple fades/hovers.
-- **react-router-dom** — client-side routing (`BrowserRouter`).
+- **react-router-dom** — client-side routing (`BrowserRouter`), routes are
+  `React.lazy`-loaded per page so the heavy markdown renderer only loads on
+  `/projects/:id`.
+- **react-markdown + remark-gfm** — `Project.description` is GitHub-flavored
+  Markdown, rendered by `src/components/portfolio/Markdown.tsx`. That
+  component also implements a custom convention: a fenced code block with
+  language `youtube` (```` ```youtube\nVIDEO_ID\n``` ````) renders as an
+  inline `YoutubeEmbed` instead of a code block — this is how a project can
+  have more than one video, anywhere in the body, without touching HTML.
 - **oxlint** — linter (`npm run lint`), not ESLint. **prettier** — formatter
   (`npm run format`).
 - **gh-pages** — deploy script (`npm run deploy`) pushes `dist/` to a
@@ -48,15 +57,25 @@ src/
   components/
     layout/     Header, Footer, Layout (page-transition wrapper), Container
     ui/         Generic, content-agnostic: Button (recipe-based variants), Tag
-    portfolio/  Domain components: ProjectCard, YoutubeEmbed, LinkList, icons
+    portfolio/  Domain components: ProjectCard (truncates tags to 4 + a "+N"
+                badge — full list still shown on the detail page, filtering
+                always matches against the untruncated Project.tags),
+                YoutubeEmbed, LinkList, Markdown (renders Project.description),
+                ProjectFilters (search + tag filter with an any/all mode
+                toggle + year filter, used on the Projects page), icons
     home/       Hero (GSAP entrance timeline)
   data/
     profile.ts   Single source of truth for the site owner's info
     projects.ts  Single source of truth for portfolio entries — an array of
-                 Project objects. Nothing else needs to change to add a
+                 Project objects, plus derived `allTags`/`allYears` used by
+                 ProjectFilters. Nothing else needs to change to add a
                  project; the list page, home "Featured" section, and detail
                  route all derive from this array.
-  pages/         One file per route: Home, Projects, ProjectDetail, NotFound
+  lib/
+    date.ts   formatPeriod(date, endDate) — '2026.03 - 진행 중' style strings
+    gsap.ts   registers ScrollTrigger once, re-exports gsap
+  pages/         One file per route: Home, Projects (owns filter state),
+                 ProjectDetail, NotFound
   styles/
     theme.css.ts   All design tokens (color, spacing, type scale, radius,
                     shadow, transition) via `createGlobalTheme`. Change a
