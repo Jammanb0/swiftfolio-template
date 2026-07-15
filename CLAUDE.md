@@ -55,6 +55,10 @@ npm run deploy    # build + push dist/ to gh-pages branch
 ```
 src/
   components/
+    SiteMeta.tsx  Renders nothing — a mount-once effect (mounted in App.tsx)
+                that sets document.title and the favicon <link> from
+                profile.name / profile.avatar at runtime, since index.html
+                is static and can't know profile data at build time.
     layout/     Header (renders profile.avatar as a circular image when set —
                 empty string renders nothing, don't add a fallback icon),
                 Footer, Layout (page-transition wrapper), Container
