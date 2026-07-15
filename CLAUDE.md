@@ -102,6 +102,21 @@ src/
   **project page** instead, `vite.config.ts`'s `base` and
   `public/404.html`'s `pathSegmentsToKeep` both need updating — see README.
 
+## Release workflow (exception to the personal "always ask before push" rule)
+
+Once a meaningful batch of features/fixes has landed on this repo, handle the
+release yourself instead of asking first: bump `package.json`'s version,
+commit, create an annotated `vX.Y.Z` tag, push both, and create a GitHub
+Release with notes summarizing what shipped — then report back to the user
+what was released. This was explicitly requested to reduce back-and-forth on
+routine version bumps.
+
+This is a deliberate, narrow override of the general rule in the personal
+`CLAUDE.md` ("always ask before git commit/push"). It only covers the
+release-tagging step for *this* repo once work is ready to ship — day-to-day
+feature commits during active work still follow the general rule (ask before
+committing/pushing) unless told otherwise.
+
 ## Things not to do
 
 - Don't add a CMS, MDX, or a headless content backend — the whole point of
