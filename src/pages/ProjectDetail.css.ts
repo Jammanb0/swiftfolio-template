@@ -24,11 +24,18 @@ export const header = style({
   marginBottom: vars.space[8],
 })
 
-export const dateText = style({
+export const metaRow = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: vars.space[2],
   fontSize: vars.fontSize.caption,
   color: vars.color.textTertiary,
   fontWeight: vars.fontWeight.semibold,
   marginBottom: vars.space[3],
+})
+
+export const metaDivider = style({
+  color: vars.color.gray300,
 })
 
 export const title = style({
@@ -62,10 +69,30 @@ export const thumbFallback = style({
 })
 
 export const description = style({
-  fontSize: vars.fontSize.bodyLg,
-  lineHeight: vars.lineHeight.body,
-  color: vars.color.textSecondary,
-  whiteSpace: 'pre-line',
   maxWidth: '68ch',
   marginBottom: vars.space[10],
+})
+
+export const highlights = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: vars.space[3],
+  padding: vars.space[6],
+  borderRadius: vars.radius.lg,
+  backgroundColor: vars.color.backgroundAlt,
+  marginBottom: vars.space[10],
+})
+
+export const highlightItem = style({
+  display: 'flex',
+  gap: vars.space[3],
+  fontSize: vars.fontSize.small,
+  color: vars.color.textSecondary,
+  lineHeight: vars.lineHeight.body,
+})
+
+export const highlightMark = style({
+  flexShrink: 0,
+  color: vars.color.blue500,
+  fontWeight: vars.fontWeight.bold,
 })

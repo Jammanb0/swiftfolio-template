@@ -4,17 +4,23 @@ import { Container } from '@/components/layout/Container'
 import { Tag } from '@/components/ui/Tag'
 import { YoutubeEmbed } from '@/components/portfolio/YoutubeEmbed'
 import { LinkList } from '@/components/portfolio/LinkList'
+import { Markdown } from '@/components/portfolio/Markdown'
 import { getProjectById } from '@/data/projects'
+import { formatPeriod } from '@/lib/date'
 import {
   wrapper,
   back,
   header,
-  dateText,
+  metaRow,
+  metaDivider,
   title,
   tagRow,
   media,
   thumbFallback,
   description,
+  highlights,
+  highlightItem,
+  highlightMark,
 } from './ProjectDetail.css'
 
 export default function ProjectDetail() {
@@ -24,11 +30,6 @@ export default function ProjectDetail() {
   if (!project) {
     return <Navigate to="/projects" replace />
   }
-
-  const formattedDate = new Date(project.date).toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: 'long',
-  })
 
   return (
     <Container>
@@ -43,7 +44,15 @@ export default function ProjectDetail() {
         </Link>
 
         <header className={header}>
-          <p className={dateText}>{formattedDate}</p>
+          <p className={metaRow}>
+            <span>{formatPeriod(project.date, project.endDate)}</span>
+            {project.role && (
+              <>
+                <span className={metaDivider}>·</span>
+                <span>{project.role}</span>
+              </>
+            )}
+          </p>
           <h1 className={title}>{project.title}</h1>
           <div className={tagRow}>
             {project.tags.map((t) => (
@@ -62,7 +71,20 @@ export default function ProjectDetail() {
           )}
         </div>
 
-        <p className={description}>{project.description}</p>
+        {project.highlights && project.highlights.length > 0 && (
+          <ul className={highlights}>
+            {project.highlights.map((h) => (
+              <li key={h} className={highlightItem}>
+                <span className={highlightMark}>→</span>
+                <span>{h}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <div className={description}>
+          <Markdown>{project.description}</Markdown>
+        </div>
 
         {project.links && <LinkList links={project.links} />}
       </motion.div>

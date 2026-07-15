@@ -38,6 +38,12 @@ export const body = style({
   gap: vars.space[3],
 })
 
+export const meta = style({
+  fontSize: vars.fontSize.caption,
+  fontWeight: vars.fontWeight.semibold,
+  color: vars.color.textTertiary,
+})
+
 export const title = style({
   fontSize: vars.fontSize.h4,
   fontWeight: vars.fontWeight.bold,
@@ -55,4 +61,16 @@ export const tagRow = style({
   flexWrap: 'wrap',
   gap: vars.space[2],
   marginTop: vars.space[1],
+})
+
+export const moreTag = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  height: '28px',
+  padding: `0 ${vars.space[3]}`,
+  borderRadius: vars.radius.full,
+  backgroundColor: vars.color.gray100,
+  color: vars.color.textTertiary,
+  fontSize: vars.fontSize.caption,
+  fontWeight: vars.fontWeight.semibold,
 })
