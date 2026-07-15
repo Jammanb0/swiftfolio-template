@@ -10,7 +10,8 @@ import type { Project } from '@/types/project'
  * - title        string, 필수. 프로젝트 이름.
  * - summary      string, 필수. 카드에 보이는 한 줄 요약.
  * - description  string, 필수. 상세 페이지 본문 — 마크다운 문법(헤딩 #/##, **굵게**,
- *                *기울임*, 표, 목록, [링크](url))을 그대로 씁니다.
+ *                *기울임*, 표, 목록, [링크](url), ![이미지](경로))을 그대로 씁니다.
+ *                이미지는 public/ 폴더에 파일을 넣고 '/파일명.png'로 참조하면 됩니다.
  *                유튜브 영상을 본문 중간에 넣고 싶으면 ```youtube 코드블록 안에
  *                영상 ID만 적으세요 (아래 sample-design-system 예시 참고).
  * - role?        string, 선택. 예: 'Solo Developer', 'Team Lead, Frontend'.
@@ -25,7 +26,8 @@ import type { Project } from '@/types/project'
  * - links?       { label, url, icon? }[], 선택. icon은 'github' | 'external' | 'demo'.
  * - date         string, 필수. 'YYYY-MM-DD' 형식. 시작일이며 정렬 기준입니다.
  * - endDate?     string, 선택. 'YYYY-MM-DD'. 생략하면 "진행 중"으로 표시됩니다.
- * - featured?    boolean, 선택. true면 홈 화면 Featured 섹션에 노출됩니다.
+ * - featured?    boolean, 선택. true면 홈 화면 Featured 섹션에 노출됩니다. 프로젝트가
+ *                많아지면 대표작 몇 개만 true로 골라서 홈 화면을 짧게 유지하세요.
  */
 export const projects: Project[] = [
   {
