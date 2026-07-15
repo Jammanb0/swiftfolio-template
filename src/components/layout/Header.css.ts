@@ -22,10 +22,21 @@ export const inner = style({
 })
 
 export const logo = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: vars.space[3],
   fontSize: vars.fontSize.h4,
   fontWeight: vars.fontWeight.extrabold,
   color: vars.color.textPrimary,
   letterSpacing: '-0.02em',
+})
+
+export const avatar = style({
+  width: '32px',
+  height: '32px',
+  borderRadius: vars.radius.full,
+  objectFit: 'cover',
+  border: `1px solid ${vars.color.border}`,
 })
 
 export const nav = style({

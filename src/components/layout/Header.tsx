@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { profile } from '@/data/profile'
-import { header, inner, logo, nav, navLink, navLinkActive } from './Header.css'
+import { header, inner, logo, avatar, nav, navLink, navLinkActive } from './Header.css'
 
 const links = [
   { to: '/', label: 'Home' },
@@ -12,6 +12,7 @@ export function Header() {
     <header className={header}>
       <div className={inner}>
         <NavLink to="/" className={logo}>
+          {profile.avatar && <img className={avatar} src={profile.avatar} alt={profile.name} />}
           {profile.name}
         </NavLink>
         <nav className={nav}>
