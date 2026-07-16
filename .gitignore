@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local-only AI assistant planning notes, not published with the template
+DECISIONS.md
+CLAUDE.personal.md

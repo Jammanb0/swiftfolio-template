@@ -1,9 +1,16 @@
 # CLAUDE.md
 
-Guidance for Claude Code (or any AI coding agent) working in this repo.
-Rules and conventions live here. For *why* things were decided this way, and
-for planned-but-not-yet-done work, see [DECISIONS.md](DECISIONS.md) — check
-it too before starting work.
+Guidance for Claude Code (or any AI coding agent) working in this repo —
+including anyone who forks this template and opens it with their own AI
+coding agent. Keep everything here generic and reusable: architecture,
+conventions, stack rules. Two gitignored, local-only files sit alongside this
+one and nothing here should depend on either existing: `DECISIONS.md` (this
+project's technical decisions/rationale and future plans) and
+`CLAUDE.personal.md` (the project owner's own Claude-workflow habits and
+anything specific to their personal instance of this project — never generic). If something in
+either of those turns out to be generic enough that other users of this
+template would benefit from it, ask before promoting it into this file
+instead of assuming it should stay private.
 
 ## What this is
 
@@ -114,21 +121,6 @@ src/
   repo root, `base: '/'` in `vite.config.ts`). If someone deploys it as a
   **project page** instead, `vite.config.ts`'s `base` and
   `public/404.html`'s `pathSegmentsToKeep` both need updating — see README.
-
-## Release workflow (exception to the personal "always ask before push" rule)
-
-Once a meaningful batch of features/fixes has landed on this repo, handle the
-release yourself instead of asking first: bump `package.json`'s version,
-commit, create an annotated `vX.Y.Z` tag, push both, and create a GitHub
-Release with notes summarizing what shipped — then report back to the user
-what was released. This was explicitly requested to reduce back-and-forth on
-routine version bumps.
-
-This is a deliberate, narrow override of the general rule in the personal
-`CLAUDE.md` ("always ask before git commit/push"). It only covers the
-release-tagging step for *this* repo once work is ready to ship — day-to-day
-feature commits during active work still follow the general rule (ask before
-committing/pushing) unless told otherwise.
 
 ## Safety
 
