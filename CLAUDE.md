@@ -1,6 +1,9 @@
 # CLAUDE.md
 
 Guidance for Claude Code (or any AI coding agent) working in this repo.
+Rules and conventions live here. For *why* things were decided this way, and
+for planned-but-not-yet-done work, see [DECISIONS.md](DECISIONS.md) — check
+it too before starting work.
 
 ## What this is
 
@@ -126,6 +129,14 @@ This is a deliberate, narrow override of the general rule in the personal
 release-tagging step for *this* repo once work is ready to ship — day-to-day
 feature commits during active work still follow the general rule (ask before
 committing/pushing) unless told otherwise.
+
+## Safety
+
+Never let a commit/push include personal information (phone number, personal
+email, addresses) or secrets (GitHub tokens, API keys, passwords, `.env`
+files, credentials of any kind). Check the actual diff before staging/
+committing — if anything like this shows up, stop and ask instead of
+committing it, even if it's already in a file you were asked to add.
 
 ## Things not to do
 
