@@ -3,14 +3,14 @@
 Guidance for Claude Code (or any AI coding agent) working in this repo —
 including anyone who forks this template and opens it with their own AI
 coding agent. Keep everything here generic and reusable: architecture,
-conventions, stack rules. Two gitignored, local-only files sit alongside this
-one and nothing here should depend on either existing: `DECISIONS.md` (this
-project's technical decisions/rationale and future plans) and
-`CLAUDE.personal.md` (the project owner's own Claude-workflow habits and
-anything specific to their personal instance of this project — never generic). If something in
-either of those turns out to be generic enough that other users of this
-template would benefit from it, ask before promoting it into this file
-instead of assuming it should stay private.
+conventions, stack rules. A gitignored `.claude/plans/` (this project's
+technical decisions/rationale and future plans) and a gitignored
+`CLAUDE.local.md` (the project owner's own Claude-workflow habits and
+anything specific to their personal instance of this project — never
+generic) sit alongside this one, and nothing here should depend on either
+existing. If something in either of those turns out to be generic enough
+that other users of this template would benefit from it, ask before
+promoting it into this file instead of assuming it should stay private.
 
 ## What this is
 
