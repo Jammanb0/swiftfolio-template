@@ -18,6 +18,11 @@ React + TypeScript로 만든, 흰 배경과 파란 포인트 컬러를 사용하
 
 ## 시작하기
 
+### 요구 사항
+
+- Node.js `^20.19.0` 또는 `>=22.12.0` (Node 22 LTS 권장)
+- npm `10` 이상 권장
+
 ```bash
 npm install
 npm run dev
