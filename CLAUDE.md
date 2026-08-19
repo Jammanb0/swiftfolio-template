@@ -1,7 +1,7 @@
 # CLAUDE.md
 
 Guidance for Claude Code (or any AI coding agent) working in this repo —
-including anyone who forks this template and opens it with their own AI
+including anyone who creates a repository from this template and opens it with their own AI
 coding agent. Keep everything here generic and reusable: architecture,
 conventions, stack rules. A gitignored `.claude/plans/` (this project's
 technical decisions/rationale and future plans) and a gitignored
@@ -17,8 +17,9 @@ promoting it into this file instead of assuming it should stay private.
 A React + TypeScript portfolio site template, styled like a clean fintech
 product — Toss-style: white background, a single blue accent color, generous
 rounded corners, subtle shadows, big confident type, paired with rich but
-purposeful motion (not just a bare white page). Meant to be forked/cloned by
-anyone and deployed as their own `<username>.github.io` GitHub Pages site.
+purposeful motion (not just a bare white page). Meant to be used through
+GitHub's Template repository flow or cloned by anyone and deployed as their
+own `<username>.github.io` GitHub Pages site.
 
 ## Stack
 

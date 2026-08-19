@@ -1,7 +1,7 @@
 # Swiftfolio Template
 
 React + TypeScript로 만든, 흰 배경과 파란 포인트 컬러를 사용하는 빠르고 담백한 포트폴리오 사이트 템플릿입니다.
-누구나 fork/clone해서 자신의 GitHub Pages 포트폴리오(`your-id.github.io`)로 바로 사용할 수 있도록 만들어졌습니다.
+누구나 **Use this template**으로 자신의 GitHub Pages 포트폴리오(`your-id.github.io`)를 바로 만들 수 있습니다.
 
 > AI(Claude Code)를 활용해 기획부터 구현까지 진행한 프로젝트입니다. 과정이 궁금하다면 [PROCESS.md](PROCESS.md)를 참고하세요.
 
@@ -18,7 +18,22 @@ React + TypeScript로 만든, 흰 배경과 파란 포인트 컬러를 사용하
 
 ## 시작하기
 
-### 요구 사항
+### 1. 내 저장소 만들기
+
+1. 이 저장소 상단의 **Use this template → Create a new repository**를 선택합니다.
+2. Repository name을 `<GitHub 사용자명>.github.io`로 입력합니다. 예를 들어 사용자명이 `your-id`라면 `your-id.github.io`입니다.
+3. Public 저장소로 생성한 뒤 로컬에 clone합니다.
+
+```bash
+git clone https://github.com/your-id/your-id.github.io.git
+cd your-id.github.io
+```
+
+> Fork나 일반 clone도 가능하지만, 사용자 페이지에 필요한 저장소 이름을 처음부터 지정하고 원본과 독립된 이력으로 시작할 수 있는 Template 방식을 권장합니다.
+
+### 2. 개발 환경 실행
+
+요구 사항:
 
 - Node.js `^20.19.0` 또는 `>=22.12.0` (Node 22 LTS 권장)
 - npm `10` 이상 권장
@@ -100,8 +115,8 @@ npm run dev
 
 ### 최초 설정
 
-1. GitHub에서 `your-id.github.io` 이름으로 새 레포지토리를 만들고, 이 템플릿의 내용을 push합니다.
-2. 배포:
+1. 위의 **시작하기** 절차에 따라 `your-id.github.io` 저장소를 만들고 내 정보와 프로젝트를 입력합니다.
+2. 처음 배포합니다.
    ```bash
    npm run deploy
    ```
@@ -178,4 +193,4 @@ src/
 
 ## 라이선스
 
-자유롭게 fork하고 커스터마이징해서 사용하세요.
+자유롭게 Template으로 새 저장소를 만들거나 clone해서 커스터마이징하세요.
