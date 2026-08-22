@@ -22,6 +22,16 @@ describe('project data validation', () => {
     expect(issues, formatProjectValidationIssues(issues)).toEqual([])
   })
 
+  it('keeps sample descriptions readable as multiline Markdown', () => {
+    for (const project of projects) {
+      expect(project.description).toContain('\n\n')
+      expect(project.description).not.toContain('\\n')
+    }
+
+    const designSystem = projects.find((project) => project.id === 'sample-design-system')
+    expect(designSystem?.description).toContain('```youtube\ndQw4w9WgXcQ\n```')
+  })
+
   it('reports blank required fields and unsafe IDs', () => {
     const issues = validateProjects([
       makeProject({ id: 'invalid project', title: '', summary: ' ', description: '' }),

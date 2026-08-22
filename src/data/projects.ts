@@ -14,6 +14,8 @@ export { getProjectYearRange } from '@/lib/projects'
  * - summary      string, 필수. 카드에 보이는 한 줄 요약.
  * - description  string, 필수. 상세 페이지 본문 — 마크다운 문법(헤딩 #/##, **굵게**,
  *                *기울임*, 표, 목록, [링크](url), ![이미지](경로))을 그대로 씁니다.
+ *                백틱 템플릿 리터럴로 실제 줄바꿈을 그대로 작성할 수 있습니다.
+ *                본문에서 마크다운 백틱을 쓸 때는 \`처럼 앞에 역슬래시를 붙입니다.
  *                이미지는 public/ 폴더에 파일을 넣고 '/파일명.png'로 참조하면 됩니다.
  *                유튜브 영상을 본문 중간에 넣고 싶으면 ```youtube 코드블록 안에
  *                영상 ID만 적으세요 (아래 sample-design-system 예시 참고).
@@ -43,8 +45,27 @@ export const projects: Project[] = [
       '이 항목은 상세 페이지 상단에 강조되는 bullet 목록입니다.',
       'src/data/projects.ts의 highlights 배열에 원하는 만큼 추가하세요.',
     ],
-    description:
-      '## 이 프로젝트는 템플릿 예시입니다\n\n`src/data/projects.ts` 파일의 이 항목을 자신의 프로젝트 정보로 바꾸거나, 배열에 새 항목을 추가해서 포트폴리오를 채워보세요.\n\n**설명(description)은 마크다운을 지원**합니다 — 표도 쓸 수 있어요.\n\n| 항목 | 설명 |\n| --- | --- |\n| 헤딩 | `##`, `###` |\n| 강조 | `**굵게**`, `*기울임*` |\n| 표 | 이 표처럼 |\n| 이미지 | `![alt](url)` |\n\n- 목록도 되고\n- 링크도 됩니다: [example.com](https://example.com)\n\n이미지도 기본 마크다운 문법으로 됩니다:\n\n![샘플 이미지](https://placehold.co/600x300)\n\n이 프로젝트는 thumbnail과 youtubeId가 둘 다 있어서, 상세 페이지에 배너 이미지가 먼저, 유튜브 영상이 그 아래에 순서대로 표시됩니다.',
+    description: `## 이 프로젝트는 템플릿 예시입니다
+
+\`src/data/projects.ts\` 파일의 이 항목을 자신의 프로젝트 정보로 바꾸거나, 배열에 새 항목을 추가해서 포트폴리오를 채워보세요.
+
+**설명(description)은 마크다운을 지원**합니다 — 표도 쓸 수 있어요.
+
+| 항목 | 설명 |
+| --- | --- |
+| 헤딩 | \`##\`, \`###\` |
+| 강조 | \`**굵게**\`, \`*기울임*\` |
+| 표 | 이 표처럼 |
+| 이미지 | \`![alt](url)\` |
+
+- 목록도 되고
+- 링크도 됩니다: [example.com](https://example.com)
+
+이미지도 기본 마크다운 문법으로 됩니다:
+
+![샘플 이미지](https://placehold.co/600x300)
+
+이 프로젝트는 thumbnail과 youtubeId가 둘 다 있어서, 상세 페이지에 배너 이미지가 먼저, 유튜브 영상이 그 아래에 순서대로 표시됩니다.`,
     thumbnail: 'https://placehold.co/1200x675',
     youtubeId: 'dQw4w9WgXcQ',
     tags: ['React', 'TypeScript', 'Vite'],
@@ -60,8 +81,17 @@ export const projects: Project[] = [
     title: '디자인 시스템 구축',
     summary: '팀의 일관된 UI를 위한 컴포넌트 라이브러리를 설계했습니다.',
     role: 'Frontend Developer',
-    description:
-      '두 번째 샘플 프로젝트입니다. `youtubeId` 없이 `thumbnail`만 있는 예시라, 상세 페이지엔 배너 이미지만 표시되고 그 아래 영상 자리는 아예 생기지 않습니다.\n\nendDate가 없으면 상세 페이지와 카드에 기간이 "진행 중"으로 표시됩니다.\n\n본문 중간에 유튜브 영상을 넣고 싶다면 이렇게 코드블록 언어를 `youtube`로 쓰고 영상 ID만 적으세요:\n\n```youtube\ndQw4w9WgXcQ\n```\n\n위 블록이 실제로는 반응형 플레이어로 렌더링됩니다. 하나의 프로젝트에 여러 개 넣어도 됩니다.',
+    description: `두 번째 샘플 프로젝트입니다. \`youtubeId\` 없이 \`thumbnail\`만 있는 예시라, 상세 페이지엔 배너 이미지만 표시되고 그 아래 영상 자리는 아예 생기지 않습니다.
+
+endDate가 없으면 상세 페이지와 카드에 기간이 "진행 중"으로 표시됩니다.
+
+본문 중간에 유튜브 영상을 넣고 싶다면 이렇게 코드블록 언어를 \`youtube\`로 쓰고 영상 ID만 적으세요:
+
+\`\`\`youtube
+dQw4w9WgXcQ
+\`\`\`
+
+위 블록이 실제로는 반응형 플레이어로 렌더링됩니다. 하나의 프로젝트에 여러 개 넣어도 됩니다.`,
     thumbnail: 'https://placehold.co/1200x675',
     tags: ['Storybook', 'vanilla-extract', 'Design System'],
     links: [{ label: 'GitHub', url: 'https://github.com', icon: 'github' }],
@@ -73,8 +103,9 @@ export const projects: Project[] = [
     title: '사이드 프로젝트',
     summary: '주말 동안 만들어본 작은 프로젝트입니다.',
     role: 'Solo Developer',
-    description:
-      '세 번째 샘플 프로젝트 설명입니다. `endDate`를 지정하면 기간이 "시작 - 종료"로 표시됩니다.\n\n이 프로젝트는 `thumbnail`도 `youtubeId`도 없어서, 상세 페이지에 미디어 영역 자체가 생기지 않고 곧바로 이 본문으로 이어집니다 — 빈 박스가 뜨지 않습니다.',
+    description: `세 번째 샘플 프로젝트 설명입니다. \`endDate\`를 지정하면 기간이 "시작 - 종료"로 표시됩니다.
+
+이 프로젝트는 \`thumbnail\`도 \`youtubeId\`도 없어서, 상세 페이지에 미디어 영역 자체가 생기지 않고 곧바로 이 본문으로 이어집니다 — 빈 박스가 뜨지 않습니다.`,
     tags: ['Next.js', 'GSAP'],
     links: [{ label: 'GitHub', url: 'https://github.com', icon: 'github' }],
     date: '2025-11-10',
