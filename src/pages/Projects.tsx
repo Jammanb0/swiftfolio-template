@@ -2,7 +2,8 @@ import { useMemo, useState } from 'react'
 import { Container } from '@/components/layout/Container'
 import { ProjectCard } from '@/components/portfolio/ProjectCard'
 import { ProjectFilters, type TagMode } from '@/components/portfolio/ProjectFilters'
-import { sortedProjects, allTags, allYears, getProjectYearRange } from '@/data/projects'
+import { sortedProjects, allTags, allYears } from '@/data/projects'
+import { filterProjects } from '@/lib/projects'
 import { header, title, subtitle, grid, empty } from './Projects.css'
 
 export default function Projects() {
@@ -24,18 +25,7 @@ export default function Projects() {
   }
 
   const filteredProjects = useMemo(() => {
-    const q = query.trim().toLowerCase()
-    return sortedProjects.filter((project) => {
-      const matchesQuery = q === '' || project.title.toLowerCase().includes(q)
-      const matchesTags =
-        selectedTags.length === 0 ||
-        (tagMode === 'all'
-          ? selectedTags.every((tag) => project.tags.includes(tag))
-          : selectedTags.some((tag) => project.tags.includes(tag)))
-      const matchesYear =
-        selectedYear === 'all' || getProjectYearRange(project).includes(selectedYear)
-      return matchesQuery && matchesTags && matchesYear
-    })
+    return filterProjects(sortedProjects, { query, selectedTags, tagMode, selectedYear })
   }, [query, selectedTags, tagMode, selectedYear])
 
   return (
