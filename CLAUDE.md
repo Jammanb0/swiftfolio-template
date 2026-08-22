@@ -69,10 +69,10 @@ npm run deploy    # build + push dist/ to gh-pages branch
 ```
 src/
   components/
-    SiteMeta.tsx  Renders nothing — a mount-once effect (mounted in App.tsx)
-                that sets document.title and the favicon <link> from
-                profile.name / profile.avatar at runtime, since index.html
-                is static and can't know profile data at build time.
+    SiteMeta.tsx  Renders nothing — keeps title, description, canonical,
+                robots, Open Graph, Twitter Card, and favicon metadata in
+                sync with the current route. Default metadata comes from
+                profile.ts and is also injected into index.html at build time.
     layout/     Header (renders profile.avatar as a circular image when set —
                 empty string renders nothing, don't add a fallback icon),
                 Footer, Layout (page-transition wrapper), Container
@@ -85,7 +85,8 @@ src/
                 toggle + year filter, used on the Projects page), icons
     home/       Hero (GSAP entrance timeline)
   data/
-    profile.ts   Single source of truth for the site owner's info
+    profile.ts   Single source of truth for the site owner's info and default
+                 search/social metadata (`siteMetadata`)
     projects.ts  Single source of truth for portfolio entries — an array of
                  Project objects, plus derived `allTags`/`allYears` used by
                  ProjectFilters. Nothing else needs to change to add a
@@ -95,6 +96,7 @@ src/
   lib/
     date.ts   formatPeriod(date, endDate) — '2026.03 - 진행 중' style strings
     gsap.ts   registers ScrollTrigger once, re-exports gsap
+    metadata.ts resolves route-specific SEO and social-sharing metadata
   pages/         One file per route: Home, Projects (owns filter state),
                  ProjectDetail, NotFound
   styles/
