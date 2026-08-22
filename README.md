@@ -168,6 +168,7 @@ GitHub Pages는 정적 호스팅이라 `/projects/foo`처럼 깊은 경로를 �
 | `npm run build`   | 타입 체크 + 프로덕션 빌드   |
 | `npm run preview` | 빌드 결과 로컬 미리보기     |
 | `npm run lint`    | oxlint로 코드 검사          |
+| `npm run test`    | Vitest 테스트 한 번 실행     |
 | `npm run format`  | prettier로 코드 포맷팅      |
 | `npm run deploy`  | 빌드 후 GitHub Pages로 배포 |
 

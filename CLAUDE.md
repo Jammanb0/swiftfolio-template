@@ -48,6 +48,8 @@ own `<username>.github.io` GitHub Pages site.
   have more than one video, anywhere in the body, without touching HTML.
 - **oxlint** — linter (`npm run lint`), not ESLint. **prettier** — formatter
   (`npm run format`).
+- **Vitest** — unit tests (`npm run test`) for project-data validation and
+  pure helpers such as filtering and date formatting.
 - **gh-pages** — deploy script (`npm run deploy`) pushes `dist/` to a
   `gh-pages` branch.
 
@@ -57,6 +59,7 @@ own `<username>.github.io` GitHub Pages site.
 npm run dev       # dev server (localhost:5173)
 npm run build     # tsc -b && vite build
 npm run lint      # oxlint
+npm run test      # vitest run
 npm run format    # prettier --write .
 npm run deploy    # build + push dist/ to gh-pages branch
 ```
