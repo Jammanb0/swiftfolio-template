@@ -9,6 +9,9 @@
  *   폼, Calendly 링크 등으로 바꿔도 됩니다. href가 'mailto:...'면 방문자의
  *   기본 메일 앱이 열리고, 'https://...'면 그냥 새 탭으로 이동합니다.
  * - social: 원하는 만큼 추가/삭제 가능한 배열. Footer에 순서대로 표시됩니다.
+ * - siteMetadata.url: 배포할 사이트의 전체 주소. 검색 결과와 공유 링크의 기준 URL입니다.
+ * - siteMetadata.image: SNS 공유 대표 이미지. public 경로('/og-image.png') 또는 외부 URL.
+ *   빈 문자열이면 프로젝트 thumbnail이 있는 상세 페이지만 공유 이미지를 표시합니다.
  */
 export const profile = {
   name: '홍길동',
@@ -26,4 +29,12 @@ export const profile = {
     { label: 'LinkedIn', url: 'https://linkedin.com/in/your-id' },
     { label: 'Email', url: 'mailto:hello@example.com' },
   ],
+}
+
+/** Search-engine and social-sharing defaults. Title/description follow profile automatically. */
+export const siteMetadata = {
+  url: 'https://your-id.github.io',
+  title: `${profile.name} | ${profile.role}`,
+  description: profile.bio,
+  image: '',
 }
