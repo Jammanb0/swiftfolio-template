@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { PageLoading } from '@/components/system/PageLoading'
 import { Header } from './Header'
 import { Footer } from './Footer'
 import { main } from './Layout.css'
@@ -27,7 +28,9 @@ export function Layout() {
             shouldReduceMotion ? { duration: 0 } : { duration: 0.35, ease: [0.16, 1, 0.3, 1] }
           }
         >
-          <Outlet />
+          <Suspense fallback={<PageLoading />}>
+            <Outlet />
+          </Suspense>
         </motion.main>
       </AnimatePresence>
       <Footer />
