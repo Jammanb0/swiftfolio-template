@@ -73,6 +73,9 @@ src/
                 robots, Open Graph, Twitter Card, and favicon metadata in
                 sync with the current route. Default metadata comes from
                 profile.ts and is also injected into index.html at build time.
+    system/     App-level feedback: PageLoading keeps the layout visible while
+                lazy routes load; ErrorBoundary replaces failed renders with
+                actionable retry/home recovery controls and resets by route.
     layout/     Header (renders profile.avatar as a circular image when set —
                 empty string renders nothing, don't add a fallback icon),
                 Footer, Layout (page-transition wrapper), Container
