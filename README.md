@@ -113,59 +113,63 @@ npm run dev
 
 [`src/styles/theme.css.ts`](src/styles/theme.css.ts) 에서 모든 디자인 토큰(색상, 폰트 크기, 간격, radius, shadow)을 한 곳에서 관리합니다. `color.blue500` 값만 바꿔도 전체 포인트 컬러가 바뀝니다.
 
-## GitHub Pages로 배포하기
+## GitHub Pages로 자동 배포하기
 
 이 템플릿은 `your-id.github.io` 형태의 **사용자 페이지**(레포 루트가 곧 사이트가 되는 경우)를 기본값으로 가정합니다.
 
-### 브랜치가 두 개로 나뉘는 이유
+### 자동 배포 흐름
 
-- **`main`** — 우리가 실제로 편집하는 소스 코드(TypeScript, JSX 등). 코드 수정은 **항상 여기서만** 합니다.
-- **`gh-pages`** — `npm run deploy`를 실행하면 **자동으로 생성**되는 브랜치. `main`의 소스 코드를 빌드한 **결과물(순수 HTML/CSS/JS)** 만 들어있고, GitHub Pages가 실제로 서빙하는 게 이 브랜치입니다.
+`.github/workflows/deploy-pages.yml`이 `main`에 push될 때 다음 과정을 자동으로 실행합니다.
 
-`gh-pages`는 직접 만들 필요도, 손으로 수정할 필요도 없습니다 — `npm run deploy`를 실행할 때마다 최신 빌드 결과로 자동 덮어써집니다. SourceTree 등 git 클라이언트에서도 일반 브랜치처럼 조회되지만(최초 배포 후), 여기서 직접 커밋하거나 `main`에 합칠 일은 없습니다.
+1. 의존성 설치
+2. 린트와 테스트
+3. 프로덕션 빌드
+4. `dist/`를 GitHub Pages artifact로 업로드
+5. `github-pages` 환경에 배포
+
+따라서 별도의 배포 명령이나 빌드 결과용 브랜치 없이 `main`의 최신 소스가 사이트에 반영됩니다. 템플릿 원본처럼 저장소 이름이 `.github.io`로 끝나지 않는 곳에서는 실수로 배포되지 않도록 workflow가 자동으로 건너뜁니다.
 
 ### 최초 설정
 
 1. 위의 **시작하기** 절차에 따라 `your-id.github.io` 저장소를 만들고 내 정보와 프로젝트를 입력합니다.
-2. 처음 배포합니다.
-   ```bash
-   npm run deploy
-   ```
-   `gh-pages` 패키지가 빌드 결과(`dist/`)를 `gh-pages` 브랜치로 push합니다 (브랜치가 없으면 이때 자동 생성됩니다).
-3. 레포 Settings → Pages에서 Source를 `gh-pages` 브랜치로 지정합니다. **이 설정은 최초 1회만 필요**하고, `npm run deploy`가 대신 해주지 않습니다.
-4. 몇 분 후 `https://your-id.github.io` 에서 확인할 수 있습니다.
+2. GitHub 저장소의 **Settings → Pages**로 이동합니다.
+3. **Build and deployment → Source**를 **GitHub Actions**로 선택합니다. 이 설정은 최초 한 번만 필요합니다.
+4. 변경한 소스를 `main`에 push합니다.
+5. 저장소의 **Actions → Deploy to GitHub Pages**에서 진행 상황을 확인합니다.
+6. 완료되면 `https://your-id.github.io`에서 확인할 수 있습니다.
 
 ### 이후 콘텐츠를 수정할 때마다
 
-최초 설정이 끝나면, 이후엔 다음 절차만 반복하면 됩니다.
+최초 설정 이후에는 소스 변경을 `main`에 push하는 것만으로 배포까지 이어집니다.
 
 ```bash
 # 1. profile.ts, projects.ts 등 main에서 수정
 
-# 2. 소스 코드를 GitHub에 백업 (사이트 반영과는 별개로 항상 하는 걸 권장)
+# 2. 변경 내용을 커밋하고 push
 git add .
 git commit -m "..."
 git push origin main
-
-# 3. 실제 사이트에 반영
-npm run deploy
 ```
 
-`git push`만으로는 사이트가 바뀌지 않고, `npm run deploy`만으로는 소스 코드가 GitHub에 백업되지 않습니다 — 두 단계 모두 필요합니다. (나중에 push할 때마다 자동으로 배포까지 되게 하고 싶다면 GitHub Actions로 전환할 수 있는데, 그때는 Pages Source를 `gh-pages` 브랜치 대신 "GitHub Actions"로 바꾸고 워크플로 파일을 추가해야 합니다 — 지금의 수동 방식을 대체하는 것이지 함께 쓰는 게 아닙니다.)
+push 후 GitHub Actions가 린트·테스트·빌드를 모두 통과한 경우에만 새 사이트를 배포합니다. 실패하면 기존 사이트는 그대로 유지되며, Actions 실행 화면에서 실패한 단계를 확인할 수 있습니다.
 
 ### `dist/` 폴더란
 
-`npm run build`(또는 `deploy`가 내부적으로 먼저 실행하는 빌드 과정)를 돌릴 때마다 새로 생성되는 폴더입니다. `.gitignore`에 포함되어 있어 `main`에는 커밋되지 않고, `gh-pages`로 push되고 나면 로컬에 남아있어도 신경 쓰지 않아도 되는 임시 산출물입니다. 이 안의 파일들이 Vite가 `src/`의 TypeScript/JSX/vanilla-extract 코드를 브라우저가 바로 실행 가능한 순수 HTML/CSS/JS로 변환·번들링한 최종 결과물이며, 방문자의 브라우저가 실제로 다운로드해서 렌더링하는 게 바로 이 파일들입니다.
+`npm run build`를 실행할 때마다 새로 생성되는 폴더입니다. `.gitignore`에 포함되어 있어 `main`에는 커밋되지 않습니다. GitHub Actions에서는 이 폴더를 Pages artifact로 업로드하며, 그 안의 HTML/CSS/JS가 방문자의 브라우저에 전달됩니다.
 
-> **쉽게 말하면**: `npm run deploy`를 실행하면 → 이 `dist/` 폴더가 새로 만들어지고 → 그 안의 내용을 `gh-pages` 브랜치에 **자동으로 git push**합니다. 이 push가 곧 "사이트 업데이트"입니다 — 우리가 따로 배포 버튼을 누르거나 서버에 파일을 올리는 과정이 없고, `npm run deploy` 명령어 하나가 "빌드 + gh-pages 브랜치로 push"까지 전부 알아서 해줍니다.
-> 때문에 추가한 정보는 별도로 `git push`를 통해 백업을 진행하세요.
+> **쉽게 말하면**: 소스 코드를 `main`에 push하면 GitHub가 서버에서 `dist/`를 만들고, 테스트에 성공한 결과만 사이트에 자동 반영합니다.
+
+### 기존 `gh-pages` 수동 배포를 계속 사용하는 경우
+
+이전 버전에서 `gh-pages` 브랜치를 배포 소스로 사용하던 저장소를 위해 `npm run deploy` 명령은 호환용으로 남겨두었습니다. 기존 방식을 계속 사용할 경우 `.github/workflows/deploy-pages.yml`을 제거하거나 비활성화하고 Pages Source를 `gh-pages`로 유지하세요. **GitHub Actions 방식과 수동 `gh-pages` 방식 중 하나만 사용해야 합니다.**
 
 ### 프로젝트 페이지(`your-id.github.io/repo-name`)로 배포하는 경우
 
-레포 이름이 `username.github.io`가 아니라면 다음 두 곳을 수정하세요:
+레포 이름이 `username.github.io`가 아니라면 다음 세 곳을 수정하세요:
 
 - [`vite.config.ts`](vite.config.ts) — `base: '/repo-name/'`
 - [`public/404.html`](public/404.html) — `pathSegmentsToKeep = 1`
+- [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) — `build`와 `deploy` job의 `if: endsWith(...)` 조건 제거
 
 ### 라우팅이 GitHub Pages에서 동작하는 원리
 
@@ -173,15 +177,15 @@ GitHub Pages는 정적 호스팅이라 `/projects/foo`처럼 깊은 경로를 �
 
 ## 스크립트
 
-| 명령어            | 설명                        |
-| ----------------- | --------------------------- |
-| `npm run dev`     | 개발 서버 실행              |
-| `npm run build`   | 타입 체크 + 프로덕션 빌드   |
-| `npm run preview` | 빌드 결과 로컬 미리보기     |
-| `npm run lint`    | oxlint로 코드 검사          |
-| `npm run test`    | Vitest 테스트 한 번 실행     |
-| `npm run format`  | prettier로 코드 포맷팅      |
-| `npm run deploy`  | 빌드 후 GitHub Pages로 배포 |
+| 명령어            | 설명                             |
+| ----------------- | -------------------------------- |
+| `npm run dev`     | 개발 서버 실행                   |
+| `npm run build`   | 타입 체크 + 프로덕션 빌드        |
+| `npm run preview` | 빌드 결과 로컬 미리보기          |
+| `npm run lint`    | oxlint로 코드 검사               |
+| `npm run test`    | Vitest 테스트 한 번 실행         |
+| `npm run format`  | prettier로 코드 포맷팅           |
+| `npm run deploy`  | 기존 `gh-pages` 수동 배포 호환용 |
 
 ## 폴더 구조
 

@@ -40,6 +40,8 @@ own `<username>.github.io` GitHub Pages site.
 - **react-router-dom** — client-side routing (`BrowserRouter`), routes are
   `React.lazy`-loaded per page so the heavy markdown renderer only loads on
   `/projects/:id`.
+
+<!-- prettier-ignore -->
 - **react-markdown + remark-gfm** — `Project.description` is GitHub-flavored
   Markdown, rendered by `src/components/portfolio/Markdown.tsx`. That
   component also implements a custom convention: a fenced code block with
@@ -50,8 +52,10 @@ own `<username>.github.io` GitHub Pages site.
   (`npm run format`).
 - **Vitest** — unit tests (`npm run test`) for project-data validation and
   pure helpers such as filtering and date formatting.
-- **gh-pages** — deploy script (`npm run deploy`) pushes `dist/` to a
-  `gh-pages` branch.
+- **GitHub Actions + GitHub Pages** — `.github/workflows/deploy-pages.yml`
+  validates and deploys `dist/` after pushes to `main` in user-page
+  repositories. The `gh-pages` package and `npm run deploy` remain only as a
+  backwards-compatible fallback for existing branch-based deployments.
 
 ## Commands
 
@@ -61,7 +65,7 @@ npm run build     # tsc -b && vite build
 npm run lint      # oxlint
 npm run test      # vitest run
 npm run format    # prettier --write .
-npm run deploy    # build + push dist/ to gh-pages branch
+npm run deploy    # legacy fallback: build + push dist/ to gh-pages branch
 ```
 
 ## Architecture

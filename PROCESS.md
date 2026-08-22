@@ -21,7 +21,8 @@
 - **Framer Motion + GSAP** — 마이크로 인터랙션/페이지 전환(Framer Motion), 히어로 스크롤 연출(GSAP)
 - **react-router-dom** — 라우팅 + GitHub Pages SPA 대응
 - **react-markdown + remark-gfm** — 프로젝트 상세 설명 마크다운 렌더링
-- **gh-pages** — GitHub Pages 배포
+- **GitHub Actions + GitHub Pages** — main push 후 검증·빌드·자동 배포
+- **gh-pages** — 기존 수동 배포 사용자를 위한 호환 경로
 
 ## 주요 의사결정
 
