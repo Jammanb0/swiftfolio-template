@@ -66,7 +66,12 @@ npm run dev
   id: 'my-new-project',        // URL: /projects/my-new-project
   title: '내 프로젝트',
   summary: '카드에 보이는 한 줄 요약',
-  description: '## 상세 페이지 본문\n\n마크다운을 그대로 씁니다. **굵게**, 표, 목록, [링크](https://...) 전부 가능합니다.',
+  description: `## 상세 페이지 본문
+
+마크다운을 실제 문서처럼 줄바꿈하며 작성합니다.
+
+- **굵게**, 표, 목록을 사용할 수 있습니다.
+- [링크](https://example.com)도 그대로 작성합니다.`,
   role: 'Solo Developer',      // 상세 페이지에 기간과 함께 표시 (선택)
   highlights: ['핵심 성과 1', '핵심 성과 2'], // 상세 페이지 상단 강조 bullet (선택)
   thumbnail: '/my-thumb.png',  // public 폴더 기준 경로 (선택)
@@ -84,7 +89,8 @@ npm run dev
 
 각 필드에 대한 설명은 [`src/data/projects.ts`](src/data/projects.ts) 상단 주석에도 동일하게 적혀 있습니다.
 
-- `description`은 **GitHub-flavored Markdown**을 지원합니다 — `#`/`##` 헤딩, `**굵게**`, `*기울임*`, 표, 목록, `[텍스트](url)` 링크를 그대로 쓰면 됩니다.
+- `description`은 백틱 템플릿 리터럴로 작성하므로 `\n`을 입력하지 않고 실제 마크다운 문서처럼 엔터로 문단을 나눌 수 있습니다.
+- **GitHub-flavored Markdown**을 지원합니다 — `#`/`##` 헤딩, `**굵게**`, `*기울임*`, 표, 목록, `[텍스트](url)` 링크를 그대로 쓰면 됩니다. 템플릿 리터럴 안에서 마크다운 백틱을 사용할 때만 앞에 역슬래시를 붙여 `` \`코드\` ``처럼 작성하세요.
 - 본문 중간에 유튜브 영상을 넣고 싶으면 코드블록 언어를 `youtube`로 지정하고 영상 ID만 적으세요. 하나의 프로젝트에 여러 개 넣어도 됩니다.
 
   ````

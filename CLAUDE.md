@@ -90,7 +90,8 @@ src/
                  Project objects, plus derived `allTags`/`allYears` used by
                  ProjectFilters. Nothing else needs to change to add a
                  project; the list page, home "Featured" section, and detail
-                 route all derive from this array.
+                 route all derive from this array. Write `description` as a
+                 multiline template literal; escape Markdown backticks as \`.
   lib/
     date.ts   formatPeriod(date, endDate) — '2026.03 - 진행 중' style strings
     gsap.ts   registers ScrollTrigger once, re-exports gsap
