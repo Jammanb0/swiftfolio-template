@@ -23,8 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
-# Local-only AI assistant planning notes, not published with the template
-CLAUDE.local.md
-.claude/rules/
+# Local-only AI assistant planning notes, not committed to the repository
 .claude/plans/
-AGENTS.md
