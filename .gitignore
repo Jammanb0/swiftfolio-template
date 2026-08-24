@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # Local-only AI assistant planning notes, not committed to the repository
-.claude/plans/
+.agents/

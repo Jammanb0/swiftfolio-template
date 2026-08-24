@@ -10,10 +10,12 @@ nothing but that import line, and this repo does not use `.claude/rules/` —
 putting rules somewhere only one tool reads is how the two versions drift
 apart.
 
-A gitignored `.claude/plans/` (this project's goals, open questions, and
-decision history) sits alongside this file. Read the relevant files there when
-they exist; nothing in this file depends on them, so a fresh clone works
-without them.
+A gitignored `.agents/` directory sits alongside this file, holding the
+project's goals, open questions, decision history, and a `handoff.md` recording
+where the last session left off. Read the relevant files there when they exist,
+and update `handoff.md` when you finish a piece of work — it is the only way
+Claude and Codex hand the state of things to each other. Nothing in this file
+depends on `.agents/` existing, so a fresh clone works without it.
 
 ## What this is
 
