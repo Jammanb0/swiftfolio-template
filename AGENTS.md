@@ -8,8 +8,8 @@ does not use `.claude/rules/`, because rules only one tool can read are how the
 two versions drift apart.
 
 **Everything in this file always applies.** Longer material lives in a
-gitignored `.agents/` directory — read those files when the task calls for
-them, not all of them every time:
+gitignored `.agents/` directory — read the referenced file at the following
+points, when it exists:
 
 | When | Read |
 | --- | --- |
@@ -21,9 +21,10 @@ them, not all of them every time:
 | Checking what was decided and why | `.agents/plans/decisions-log.md` |
 
 `.agents/` is not committed, so a fresh clone works without it and nothing in
-this file depends on it. When you finish a piece of work, update
-`.agents/plans/handoff.md` — it is the only way Claude and Codex hand the state
-of things to each other.
+this file depends on it. When `.agents/plans/handoff.md` exists, propose an
+update to it after finishing a piece of work and apply it once approved. It is
+how Claude and Codex hand the state of things to each other in this local
+setup.
 
 ## What this is
 
@@ -79,11 +80,14 @@ What the project uses is in `package.json`. What isn't written there:
 
 ## Safety
 
-Never let a commit or push include personal information (phone number, personal
-email, addresses) or secrets (GitHub tokens, API keys, passwords, `.env` files,
-credentials of any kind). Check the actual diff before staging — if anything
-like this shows up, stop and ask instead of committing it, even if it is in a
-file you were asked to add.
+Never let a commit or push include secrets — GitHub tokens, API keys,
+passwords, `.env` files, credentials of any kind. No exceptions.
+
+Personal details are more nuanced here. What the site owner deliberately
+publishes through `src/data/profile.ts` is meant to be public and is fine.
+Anything beyond that — a phone number, an address, a second personal email —
+stop and ask before committing, even if it is in a file you were asked to add.
+Check the actual diff before staging.
 
 ## Approval before acting
 
