@@ -101,8 +101,8 @@ Check the actual diff before staging.
 - **Adding a new dependency always needs approval**, even inside agreed-upon
   work. Say what it is for and what the alternatives are before installing.
 - Read-only actions don't need approval every time.
-- **Before creating, editing, or deleting any instruction file an AI tool reads
-  automatically, propose the exact wording first and get confirmation — even a
+- **Before creating, editing, or deleting any instruction or memory file used
+  by an AI tool, propose the exact wording first and get confirmation — even a
   single-character edit.** That covers `AGENTS.md`, `CLAUDE.md`,
   `AGENTS.override.md`, `CLAUDE.local.md`, `.claude/rules/`, `.agents/`, and
   the user-global files under `~/.codex/` and `~/.claude/`. **Files generated
