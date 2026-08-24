@@ -172,15 +172,17 @@ match your own habits** — nothing in the codebase depends on it.
 
 ### Git and commits
 
-- Local commits don't need approval. Commit when a self-contained chunk of work
-  is done, then say what went into each commit and why it was split that way.
+- **Every commit needs approval.** When a self-contained chunk of work is done,
+  stop and propose it: which files changed, what the message would be, and why
+  it is one commit rather than several. Commit only on an explicit go-ahead,
+  and afterward say what actually went in.
 - **`git push` always needs approval — every time.** Opening PRs and
   creating or deleting GitHub repositories need approval too. Creating a local
   branch doesn't.
-- Commit at checkpoints yourself during multi-step work; don't wait to be told
-  "commit it" at the end. When one self-contained concern is finished and the
-  next request is a different concern, commit before piling both into the same
-  diff.
+- Still raise the commit yourself at checkpoints during multi-step work — don't
+  wait to be told "commit it", and don't let unrelated concerns pile into one
+  diff. The difference is that you propose and wait, rather than committing
+  first and reporting after.
 - Prefer several small, meaningful commits over one big commit. Split by
   feature, layer, or concern — not to reduce the number of files per commit,
   but so each commit can be understood and verified on its own.
