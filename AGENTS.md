@@ -73,50 +73,9 @@ npm run deploy    # legacy fallback: build + push dist/ to gh-pages branch
 
 ## Architecture
 
-```
-src/
-  components/
-    SiteMeta.tsx  Renders nothing — keeps title, description, canonical,
-                robots, Open Graph, Twitter Card, and favicon metadata in
-                sync with the current route. Default metadata comes from
-                profile.ts and is also injected into index.html at build time.
-    system/     App-level feedback: PageLoading keeps the layout visible while
-                lazy routes load; ErrorBoundary replaces failed renders with
-                actionable retry/home recovery controls and resets by route.
-    layout/     Header (renders profile.avatar as a circular image when set —
-                empty string renders nothing, don't add a fallback icon),
-                Footer, Layout (page-transition wrapper), Container
-    ui/         Generic, content-agnostic: Button (recipe-based variants), Tag
-    portfolio/  Domain components: ProjectCard (truncates tags to 4 + a "+N"
-                badge — full list still shown on the detail page, filtering
-                always matches against the untruncated Project.tags),
-                YoutubeEmbed, LinkList, Markdown (renders Project.description),
-                ProjectFilters (search + tag filter with an any/all mode
-                toggle + year filter, used on the Projects page), icons
-    home/       Hero (GSAP entrance timeline)
-  data/
-    profile.ts   Single source of truth for the site owner's info and default
-                 search/social metadata (`siteMetadata`)
-    projects.ts  Single source of truth for portfolio entries — an array of
-                 Project objects, plus derived `allTags`/`allYears` used by
-                 ProjectFilters. Nothing else needs to change to add a
-                 project; the list page, home "Featured" section, and detail
-                 route all derive from this array. Write `description` as a
-                 multiline template literal; escape Markdown backticks as \`.
-  lib/
-    date.ts   formatPeriod(date, endDate) — '2026.03 - 진행 중' style strings
-    gsap.ts   registers ScrollTrigger once, re-exports gsap
-    metadata.ts resolves route-specific SEO and social-sharing metadata
-  pages/         One file per route: Home, Projects (owns filter state),
-                 ProjectDetail, NotFound
-  styles/
-    theme.css.ts   All design tokens (color, spacing, type scale, radius,
-                    shadow, transition) via `createGlobalTheme`. Change a
-                    token here, it propagates everywhere — never hardcode a
-                    color or spacing value in a component's .css.ts file.
-    global.css.ts  CSS reset / base element styles
-  types/project.ts Project / ProjectLink types
-```
+The `src/` layout, and the reasoning behind it, is in
+`.agents/architecture.md`. Read it before moving files around or adding a new
+component directory.
 
 ## Conventions
 
@@ -266,50 +225,5 @@ match your own habits** — nothing in the codebase depends on it.
 
 ### Progress recap
 
-After completing one or more project tasks, end the final response with one
-fenced `text` code block. Skip it for simple questions or conversations where
-no project task was completed.
-
-Use this structure inside the block:
-
-1. Start with a one-line overall summary, then always show the complete
-   numbered project plan. Use visible statuses: `✅ 완료`, `🟡 진행 중`,
-   `👉 다음`, `⏳ 대기`, `🧊 보류`, or `⛔ 막힘`.
-2. When a plan item is currently in progress, add a separate detail table
-   directly below the complete plan. Number its steps as children of the parent
-   item, such as `05-1`, `05-2`.
-3. Add `이번 작업 결과` only when the current turn completed something. Present
-   it as a table and include the related parent or child plan number for every
-   result so the user can map it back to the plan.
-4. Add `현재 작업의 남은 단계` only when the active item actually has unfinished
-   child steps. Do not use a generic `남은 작업` section merely to repeat the
-   full plan.
-5. Add `다음 추천` when the active item is complete and there is a best next
-   task. Recommend one task and briefly explain why.
-6. End with: `💬 "다음 단계 진행해줘"라고 말하면 현재 작업의 남은 단계가 있으면
-   그것을, 없으면 다음 추천 작업을 진행합니다.`
-
-Track plan changes actively:
-
-- When a task is added, changed, removed, deferred, resumed, or reordered, show
-  a `계획 변경` section using markers such as `➕ 추가`, `✏️ 수정`, `🗑️ 삭제`,
-  `↕️ 순서 변경`, and `↩️ 재개`. Briefly state why it changed.
-- If a new user request belongs under an existing plan item, add or renumber a
-  child step and clearly mark it, for example `← 사용자 요청으로 추가`.
-- If a new request changes roadmap priority or scope, update the main numbering
-  when useful and explicitly show the old-to-new mapping so numbering changes
-  do not cause confusion.
-- If a request is unrelated to the roadmap and forcing it into a numbered item
-  would be confusing, track it as `별도-01`, `별도-02`, and so on. Show it in
-  `이번 작업 결과` but clearly label it as outside the original plan.
-- Use notes such as `← 방금 완료!`, `← 사용자 요청으로 추가`, and
-  `← 우선순위 변경` proactively when they make the state easier to scan.
-
-Keep the recap concise. Show related-file trees only when the user asks for
-them or requests the full detailed status.
-
-Use the fenced `text` block only for progress-related list content: the overall
-plan, active-task details, plan changes, current-turn results, remaining active
-steps, the next recommendation, and the standard continuation prompt. Put
-technical explanations, conceptual examples, comparisons, and other prose
-outside the code block in normal Markdown.
+How the author wants progress reported at the end of a task is in
+`.agents/progress-recap.md`. Read it once at the start of a work session.
